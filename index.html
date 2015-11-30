@@ -18,7 +18,7 @@
   <script>
   var socket = io();
   socket.on('lap', function(msg){
-    $('#messages').append($('<li>').text(msg));
+    $('#messages').append($('<li>').text(msg[0].laps));
   });
   </script>
   <body>
