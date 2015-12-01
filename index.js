@@ -1,4 +1,5 @@
-var app = require('express')();
+var express = require('express');
+var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var _ = require('lodash');
@@ -11,8 +12,14 @@ var gpio = require('./lib/gpio')(config);
 var race = require('./lib/race')(config);
 race.start();
 
+app.use('/public', express.static('public'));
+
 app.get('/', function(req, res) {
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/public/index.html');
+});
+
+app.get('/api/players', function(req, res) {
+  res.json(config.players);
 });
 
 gpio.watch(function(player) {
@@ -26,6 +33,7 @@ io.on('connection', function(socket) {
   socket.on('reset', function() {
     race.stop();
     race.start();
+    io.emit('lap', race.getPlayers());
   });
   socket.on('disconnect', function(){
     console.log('user disconnected');
