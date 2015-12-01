@@ -15,19 +15,18 @@ app.get('/', function(req, res) {
   res.sendFile(__dirname + '/index.html');
 });
 
-function findPlayerByName(playerName) {
-  var matchingPlayers = _.filter(race.getPlayers(), function (player) { return player.name === playerName; });
-  return matchingPlayers[0];
-}
-
 gpio.watch(function(player) {
-  var racePlayer = findPlayerByName(player.name);
+  var racePlayer = race.findPlayerByName(player.name);
   race.addLap(racePlayer);
   io.emit('lap', race.getPlayers());
 });
 
 io.on('connection', function(socket) {
   console.log('a user connected');
+  socket.on('reset', function() {
+    race.stop();
+    race.start();
+  });
   socket.on('disconnect', function(){
     console.log('user disconnected');
   });
