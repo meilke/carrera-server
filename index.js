@@ -5,7 +5,10 @@ var io = require('socket.io')(http);
 var _ = require('lodash');
 
 var config = {
-  players: [ { name: 'first', color: 'red', photoPin: { bcm: 4, wpi: 7 }, ledPin: { bcm: 17, wpi: 0 } } ]
+  players: [
+    { name: 'first', color: 'red', photoPin: { bcm: 4, wpi: 7 }, ledPin: { bcm: 17, wpi: 0 } },
+    { name: 'second', color: 'blue', photoPin: { bcm: 25, wpi: 6 }, ledPin: { bcm: 17, wpi: 0 } }
+  ]
 };
 
 var gpio = require('./lib/gpio')(config);
