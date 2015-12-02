@@ -3,3 +3,5 @@
 # carrera-server
 
 Tracking a Carrera race digitally.
+
+![ScreenShot](http://drive.google.com/uc?export=view&id=0B4K2h1eUc0iPZXJ5RlJ4UDNkc00)
