@@ -5,7 +5,7 @@ var express = require('express'),
   _ = require('lodash'),
   config = require('config'),
   gpio = require('./lib/gpio' + config.gpio.module)(config),
-  Race = require('./lib/race'),
+  Race = require('./lib/race/Race'),
   race = new Race(config);
 
 app.use('/public', express.static('public'));

@@ -1,6 +1,6 @@
 'use strict';
 
-let Race = require('../../../lib/race');
+let Race = require('../../../lib/race/Race');
 let _ = require('lodash');
 let bluebird = require('bluebird');
 
