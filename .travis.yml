@@ -5,8 +5,6 @@ node_js:
 before_install:
   - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
   - sudo apt-get update
-  - sudo update-alternatives --remove-all gcc
-  - sudo update-alternatives --remove-all g++
   - sudo apt-get install gcc-4.8 g++-4.8 --force-yes
   - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.6 20
   - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 50
