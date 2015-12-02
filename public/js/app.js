@@ -84,11 +84,12 @@ angular.module('raceApp').controller('MainController', function ($scope, $timeou
   }
 
   function started(event) {
-    $timeout(function () {
-      ControllerHelper.within($scope, function () {
+    ControllerHelper.within($scope, function () {
+      main.secondsToGo = 0;
+      $timeout(function () {
         main.isCountingDown = false;
-      });
-    }, 1000);
+      }, 1000);
+    });
   }
 
   function bestLap(event, bestLap) {
