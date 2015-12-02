@@ -18,7 +18,7 @@ app.get('/api/players', function(req, res) {
   res.json(config.players);
 });
 
-gpio.watch(function(player) {
+gpio.watch(function (player) {
   if (!race.running) {
     console.log('Signal but race is not started yet:' + player.name);
     return;
@@ -39,31 +39,31 @@ race.on('started', function (players) {
   io.emit('started', players);
 });
 
-io.on('connection', function(socket) {
+io.on('connection', function (socket) {
   console.log('a user connected');
   socket.on('stop', function() {
     race.stop();
     io.emit('stopped', race.getPlayers());
   });
-  socket.on('start', function() {
+  socket.on('start', function () {
     race.start();
   });
-  socket.on('reset', function() {
+  socket.on('reset', function () {
     race.stop();
     io.emit('stopped', race.getPlayers());
     race.start();
   });
-  socket.on('disconnect', function(){
+  socket.on('disconnect', function () {
     console.log('user disconnected');
   });
 });
 
-process.on('SIGINT', function() {
+process.on('SIGINT', function () {
   gpio.deinitialize();
   race.stop();
   process.exit();
 });
 
-http.listen(3000, function(){
+http.listen(3000, function () {
   console.log('listening on *:3000');
 });

@@ -1,4 +1,10 @@
 {
+  "race": {
+    "countdown": {
+      "counts": 3,
+      "delay": 1000
+    }
+  },
   "gpio": {
     "module": "/fake"
   },
