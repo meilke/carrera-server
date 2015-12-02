@@ -1,6 +1,7 @@
 {
   "name": "carrera-server",
   "dependencies": {
+    "bluebird": "^3.0.6",
     "config": "^1.17.1",
     "express": "^4.13.3",
     "lodash": "^3.10.1",

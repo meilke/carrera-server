@@ -5,9 +5,8 @@ var express = require('express'),
   _ = require('lodash'),
   config = require('config'),
   gpio = require('./lib/gpio' + config.gpio.module)(config),
-  race = require('./lib/race')(config);
-
-race.start();
+  Race = require('./lib/race'),
+  race = new Race(config);
 
 app.use('/public', express.static('public'));
 
@@ -20,17 +19,39 @@ app.get('/api/players', function(req, res) {
 });
 
 gpio.watch(function(player) {
+  if (!race.running) {
+    console.log('Signal but race is not started yet:' + player.name);
+    return;
+  }
+
   var racePlayer = race.findPlayerByName(player.name);
   race.addLap(racePlayer);
   io.emit('lap', race.getPlayers());
 });
 
+race.on('countdown', function (countdown) {
+  console.log('countdown', countdown.count);
+  io.emit('countdown', countdown);
+});
+
+race.on('started', function (players) {
+  console.log('race started!');
+  io.emit('started', players);
+});
+
 io.on('connection', function(socket) {
   console.log('a user connected');
+  socket.on('stop', function() {
+    race.stop();
+    io.emit('stopped', race.getPlayers());
+  });
+  socket.on('start', function() {
+    race.start();
+  });
   socket.on('reset', function() {
     race.stop();
+    io.emit('stopped', race.getPlayers());
     race.start();
-    io.emit('lap', race.getPlayers());
   });
   socket.on('disconnect', function(){
     console.log('user disconnected');

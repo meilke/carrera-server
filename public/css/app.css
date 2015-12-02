@@ -7,6 +7,12 @@ body {
   bottom: 0;
   width: 100%;
 }
+.header {
+  margin: 10px;
+  padding-left: 10px;
+  font-size: 100px;
+  background: #eee;
+}
 .reset {
   width: 100%;
   font-size: 50px!important;

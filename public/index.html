@@ -12,6 +12,22 @@
   </head>
   <body>
     <div class="container-fluid main-container row" ng-controller="MainController as main">
+
+      <div class="row header">
+        <div class="col-md-12" ng-if="main.isCountingDown">
+          <div>Countdown</div>
+          <div>{{main.secondsToGo}}</div>
+        </div>
+        <div class="col-md-6" ng-if="!main.isCountingDown">
+          <div>Leader</div>
+          <div>{{main.leader.name}}</div>
+        </div>
+        <div class="col-md-6" ng-if="!main.isCountingDown">
+          <div>Best lap</div>
+          <div>{{main.bestLap.time}} ({{main.bestLap.name}})</div>
+        </div>
+      </div>
+
       <div class="row">
         <div ng-repeat="player in main.players">
         
