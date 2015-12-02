@@ -1,0 +1,11 @@
+{
+  "gpio": {
+    "module": "/fake"
+  },
+  "players": [
+    { "name": "first", "color": "red", "photoPin": { "bcm": 4, "wpi": 7 }, "ledPin": { "bcm": 17, "wpi": 0 } },
+    { "name": "second", "color": "red", "photoPin": { "bcm": 4, "wpi": 7 }, "ledPin": { "bcm": 17, "wpi": 0 } },
+    { "name": "third", "color": "red", "photoPin": { "bcm": 4, "wpi": 7 }, "ledPin": { "bcm": 17, "wpi": 0 } },
+    { "name": "fourth", "color": "blue", "photoPin": { "bcm": 4, "wpi": 7 }, "ledPin": { "bcm": 17, "wpi": 0 } }
+  ]
+}

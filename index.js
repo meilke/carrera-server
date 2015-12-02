@@ -1,18 +1,12 @@
-var express = require('express');
-var app = express();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-var _ = require('lodash');
+var express = require('express'),
+  app = express(),
+  http = require('http').Server(app),
+  io = require('socket.io')(http),
+  _ = require('lodash'),
+  config = require('config'),
+  gpio = require('./lib/gpio' + config.gpio.module)(config),
+  race = require('./lib/race')(config);
 
-var config = {
-  players: [
-    { name: 'first', color: 'red', photoPin: { bcm: 4, wpi: 7 }, ledPin: { bcm: 17, wpi: 0 } },
-    { name: 'second', color: 'blue', photoPin: { bcm: 25, wpi: 6 }, ledPin: { bcm: 17, wpi: 0 } }
-  ]
-};
-
-var gpio = require('./lib/gpio')(config);
-var race = require('./lib/race')(config);
 race.start();
 
 app.use('/public', express.static('public'));
