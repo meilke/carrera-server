@@ -74,6 +74,19 @@ describe('Race', () => {
       });
   });
 
+  it('does not allow start during countdown', (done) => {
+    var countdowns = [];
+    race.on('countdown', (countdown) => {
+      countdowns.push(countdown);
+    });
+    bluebird
+      .all([race.start(), race.start(), race.start(), race.start()])
+      .then(() => {
+        expect(countdowns.length).toEqual(3);
+        done();
+      });
+  });
+
   it('generates a started event with the initial player data', (done) => {
     var resultingPlayers = {};
     race.on('started', (players) => {
