@@ -25,7 +25,7 @@ gpio.watch(function(player) {
   }
 
   var racePlayer = race.findPlayerByName(player.name);
-  race.addLap(racePlayer);
+  race.signal(racePlayer);
   io.emit('lap', race.getPlayers());
 });
 
