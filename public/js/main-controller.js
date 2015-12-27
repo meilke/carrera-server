@@ -1,6 +1,7 @@
 angular.module('raceApp').controller('MainController', function ($scope, $timeout, RaceService, ControllerHelper) {
   var main = this;
   main.isCountingDown = false;
+  main.countdownText = 'Countdown';
 
   RaceService
     .getPlayers()
@@ -23,8 +24,10 @@ angular.module('raceApp').controller('MainController', function ($scope, $timeou
   function started(event) {
     ControllerHelper.within($scope, function () {
       main.secondsToGo = 0;
+      main.countdownText = 'Go!'
       $timeout(function () {
         main.isCountingDown = false;
+        main.countdownText = 'Countdown';
       }, 1000);
     });
   }

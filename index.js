@@ -21,6 +21,11 @@ app.get('/api/players', function(req, res) {
 gpio.watch(function (player) {
   if (!race.running) {
     console.log('Signal but race is not started yet:' + player.name);
+
+    if (race.isCountingDown()) {
+      io.emit('false-start', player);
+    }
+
     return;
   }
 

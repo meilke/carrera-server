@@ -17,6 +17,10 @@ angular.module('raceApp').factory('RaceService', function ($http, $rootScope) {
     $rootScope.$broadcast('started');
   });
 
+  socket.on('false-start', function (player) {
+    $rootScope.$broadcast('false-start', player);
+  });
+
   function bestLap(players) {
     var player = _.min(players, function (p) {
       return p.bestLap ? p.bestLap.elapsedSec : Number.MAX_VALUE;
@@ -33,6 +37,11 @@ angular.module('raceApp').factory('RaceService', function ($http, $rootScope) {
     $rootScope.$broadcast('reset');
   }
 
+  function stop() {
+    socket.emit('stop', '');
+    $rootScope.$broadcast('reset');
+  }
+
   function getPlayers() {
     return $http.get('/api/players').then(function (response) { return response.data; });
   }
@@ -43,6 +52,7 @@ angular.module('raceApp').factory('RaceService', function ($http, $rootScope) {
 
   return {
     reset: reset,
+    stop: stop,
     getPlayers: getPlayers
   };
 });
