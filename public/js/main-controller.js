@@ -1,9 +1,9 @@
-angular.module('raceApp').controller('MainController', function ($scope, $timeout, RaceService, ControllerHelper) {
+angular.module('raceApp').controller('MainController', function ($scope, $timeout, RaceService, ConfigService, ControllerHelper) {
   var main = this;
   main.isCountingDown = false;
   main.countdownText = 'Countdown';
 
-  RaceService
+  ConfigService
     .getPlayers()
     .then(function (players) {
       main.players = players;

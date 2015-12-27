@@ -6,9 +6,11 @@ var express = require('express'),
   config = require('config'),
   gpio = require('./lib/gpio' + config.gpio.module)(config),
   Race = require('./lib/race/Race'),
-  race = new Race(config);
+  race = new Race(config),
+  bodyParser = require('body-parser');
 
 app.use('/public', express.static('public'));
+app.use(bodyParser.json());
 
 app.get('/', function(req, res) {
   res.sendFile(__dirname + '/public/index.html');
@@ -16,6 +18,10 @@ app.get('/', function(req, res) {
 
 app.get('/api/players', function(req, res) {
   res.json(config.players);
+});
+
+app.put('/api/players', function(req, res) {
+  config.players = req.body;
 });
 
 gpio.watch(function (player) {
@@ -51,12 +57,12 @@ io.on('connection', function (socket) {
     io.emit('stopped', race.getPlayers());
   });
   socket.on('start', function () {
-    race.start();
+    race.start(config.players);
   });
   socket.on('reset', function () {
     race.stop();
     io.emit('stopped', race.getPlayers());
-    race.start();
+    race.start(config.players);
   });
   socket.on('disconnect', function () {
     console.log('user disconnected');

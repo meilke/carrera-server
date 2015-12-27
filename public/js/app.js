@@ -1,1 +1,17 @@
-angular.module('raceApp', []);
+angular.module('raceApp', ['ngRoute']);
+
+angular.module('raceApp').config(function ($routeProvider) {
+  $routeProvider.
+    when('/', {
+      templateUrl: 'public/template/race.html',
+      controllerAs: 'main',
+      controller: 'MainController'
+    }).
+    when('/setup', {
+      templateUrl: 'public/template/setup.html',
+      controller: 'SetupController'
+    }).
+    otherwise({
+      redirectTo: '/'
+    });
+});

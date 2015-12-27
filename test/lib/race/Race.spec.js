@@ -8,7 +8,7 @@ describe('Race', () => {
 
   function simulateRace() {
     return race
-      .start()
+      .start(configuredPlayers)
       .then(_.partial(bluebird.delay, 10))
       .then(_.bind(race.signal, race, configuredPlayers[1]))
       .then(_.partial(bluebird.delay, 10))
@@ -41,7 +41,7 @@ describe('Race', () => {
 
   it('can be started', (done) => {
     race
-      .start()
+      .start(configuredPlayers)
       .then(() => {
         expect(race.running).toEqual(true);
         done();
@@ -50,10 +50,10 @@ describe('Race', () => {
 
   it('cannot be started twice', (done) => {
     race
-      .start()
+      .start(configuredPlayers)
       .then((result) => {
         expect(result.alreadyStarted).toEqual(false);
-        return race.start();
+        return race.start(configuredPlayers);
       })
       .then((result) => {
         expect(result.alreadyStarted).toEqual(true);
@@ -67,7 +67,7 @@ describe('Race', () => {
       countdowns.push(countdown);
     });
     race
-      .start()
+      .start(configuredPlayers)
       .then(() => {
         expect(countdowns.length).toEqual(3);
         done();
@@ -80,7 +80,7 @@ describe('Race', () => {
       countdowns.push(countdown);
     });
     bluebird
-      .all([race.start(), race.start(), race.start(), race.start()])
+      .all([race.start(configuredPlayers), race.start(configuredPlayers), race.start(configuredPlayers), race.start(configuredPlayers)])
       .then(() => {
         expect(countdowns.length).toEqual(3);
         done();
@@ -93,7 +93,7 @@ describe('Race', () => {
       resultingPlayers = players;
     });
     race
-      .start()
+      .start(configuredPlayers)
       .then(() => {
         expect(resultingPlayers.length).toEqual(2);
         expect(resultingPlayers[1].name).toEqual('second');
@@ -115,7 +115,7 @@ describe('Race', () => {
 
   it('sets the first player as the leader before the race', (done) => {
     race
-      .start()
+      .start(configuredPlayers)
       .then(() => {
         var players = race.getPlayers();
         expect(players[0].leader).toEqual(true);

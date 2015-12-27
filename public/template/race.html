@@ -1,0 +1,41 @@
+<div class="container-fluid main-container row">
+
+  <div class="row header">
+    <div class="col-md-12" ng-if="main.isCountingDown">
+      <div>{{main.countdownText}}</div>
+      <div>{{main.secondsToGo}}</div>
+    </div>
+    <div class="col-md-6" ng-if="!main.isCountingDown">
+      <div>Leader</div>
+      <div>{{main.leader.name}}</div>
+    </div>
+    <div class="col-md-6" ng-if="!main.isCountingDown">
+      <div>Best lap</div>
+      <div>{{main.bestLap.time}} s ({{main.bestLap.name}})</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div ng-repeat="player in main.players">
+    
+      <div class="driver-container col-md-3" ng-controller="DriverController as driver" ng-init="driver.init(player.name)">
+        <div class="name">{{driver.name}} <span class="glyphicon glyphicon-ok" ng-if="driver.player.leader"></span></div>
+        <div class="name">({{driver.player.bestLap.elapsedSec}} s)</div>
+        <div class="lap-count">{{driver.numberOfLaps}}</div>
+        <div class="laps">
+          <div class="clearfix lap" ng-repeat="lap in driver.laps track by lap.id">
+            <div class="pull-left">{{lap.lap + 1}}</div>
+            <div class="pull-right">{{lap.elapsedSec}}</div>              
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <button class="btn btn-primary btn-lg reset" ng-click="main.reset()">Reset</button>
+  </div>
+
+</div>

@@ -1,4 +1,4 @@
-angular.module('raceApp').factory('RaceService', function ($http, $rootScope) {
+angular.module('raceApp').factory('RaceService', function ($rootScope) {
   var socket = io();
 
   socket.on('lap', function (players) {
@@ -42,17 +42,12 @@ angular.module('raceApp').factory('RaceService', function ($http, $rootScope) {
     $rootScope.$broadcast('reset');
   }
 
-  function getPlayers() {
-    return $http.get('/api/players').then(function (response) { return response.data; });
-  }
-
   function playerByName(players, name) {
     return _.filter(players, function (player) { return player.name === name })[0];
   }
 
   return {
     reset: reset,
-    stop: stop,
-    getPlayers: getPlayers
+    stop: stop
   };
 });
