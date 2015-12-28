@@ -19,5 +19,6 @@ angular.module('raceApp').controller('DriverController', function ($scope, RaceS
   function reset(event) {
     driver.numberOfLaps = 0;
     driver.laps = [];
+    driver.player = {};
   }
 });

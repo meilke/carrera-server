@@ -9,6 +9,7 @@ angular.module('raceApp').config(function ($routeProvider) {
     }).
     when('/setup', {
       templateUrl: 'public/template/setup.html',
+      controllerAs: 'setup',
       controller: 'SetupController'
     }).
     otherwise({

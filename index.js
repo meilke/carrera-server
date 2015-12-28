@@ -17,11 +17,16 @@ app.get('/', function(req, res) {
 });
 
 app.get('/api/players', function(req, res) {
-  res.json(config.players);
+  res.status(200).json(config.players);
 });
 
 app.put('/api/players', function(req, res) {
-  config.players = req.body;
+  if (race.running) {
+    res.sendStatus(405);
+  } else {
+    config.players = req.body;
+    res.sendStatus(204);
+  }
 });
 
 gpio.watch(function (player) {

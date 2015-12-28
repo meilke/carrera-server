@@ -1,5 +1,12 @@
 <div>
-  <form>
-    
+  <a href="#/">Back</a>
+  <div>{{setup.status}}</div>
+  <form novalidate class="form">
+    Name 1: <input type="text" ng-model="setup.players[0].name" /><br />
+    Name 2: <input type="text" ng-model="setup.players[1].name" /><br />
+    Name 3: <input type="text" ng-model="setup.players[2].name" /><br />
+    Name 4: <input type="text" ng-model="setup.players[3].name" /><br />
+    <input type="button" ng-click="setup.reset()" value="Reset" />
+    <input type="submit" ng-click="setup.update()" value="Save" />
   </form>
 </div>

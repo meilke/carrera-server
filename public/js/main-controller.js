@@ -49,5 +49,13 @@ angular.module('raceApp').controller('MainController', function ($scope, $timeou
   
   main.reset = function () {
     RaceService.reset();
+    main.bestLap = {};
+    main.leader = {};
+  };
+
+  main.stop = function () {
+    RaceService.stop();
+    main.bestLap = {};
+    main.leader = {};
   };
 });
