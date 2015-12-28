@@ -35,7 +35,7 @@ angular.module('raceApp').controller('MainController', function ($scope, $timeou
   function bestLap(event, bestLap) {
     ControllerHelper.within($scope, function () {
       main.bestLap = {
-        time: bestLap.lap.elapsedSec,
+        lap: bestLap.lap,
         name: bestLap.player.name
       };
     });

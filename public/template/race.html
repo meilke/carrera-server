@@ -11,7 +11,7 @@
     </div>
     <div class="col-md-6" ng-if="!main.isCountingDown">
       <div>Best lap</div>
-      <div ng-show="main.bestLap">{{main.bestLap.time}} s ({{main.bestLap.name}})</div>
+      <best-lap lap="main.bestLap.lap" name="main.bestLap.name"></best-lap>
     </div>
   </div>
 
@@ -20,7 +20,7 @@
     
       <div class="driver-container col-md-3" ng-controller="DriverController as driver" ng-init="driver.init(player.name)">
         <div class="name">{{driver.name}} <span class="glyphicon glyphicon-ok" ng-if="driver.player.leader"></span></div>
-        <div class="name" ng-show="driver.player.bestLap">({{driver.player.bestLap.elapsedSec}} s)</div>
+        <best-lap class="name" lap="driver.player.bestLap"></best-lap>
         <div class="lap-count">{{driver.numberOfLaps}}</div>
         <div class="laps">
           <div class="clearfix lap" ng-repeat="lap in driver.laps track by lap.id">
