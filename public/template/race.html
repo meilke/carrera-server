@@ -1,4 +1,4 @@
-<div class="container-fluid main-container row">
+<div class="row">
 
   <div class="row header">
     <div class="col-md-12" ng-if="main.isCountingDown">
@@ -34,9 +34,10 @@
 
   </div>
 
-  <div class="footer">
-    <button class="btn btn-primary btn-lg reset" ng-click="main.stop()">Stop</button>
-    <button class="btn btn-primary btn-lg reset" ng-click="main.reset()">Reset</button>
+  <div class="footer row">
+    <button class="col-md-6 btn btn-primary btn-lg big" ng-click="main.reset()">Reset</button>
+    <button class="col-md-6 btn btn-lg big" ng-click="main.stop()">Stop</button>
+    <button class="col-md-6 btn btn-lg big" ng-click="main.goToSetup()">Setup</button>
   </div>
 
 </div>

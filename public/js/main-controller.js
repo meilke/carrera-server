@@ -1,4 +1,4 @@
-angular.module('raceApp').controller('MainController', function ($scope, $timeout, RaceService, ConfigService, ControllerHelper) {
+angular.module('raceApp').controller('MainController', function ($scope, $timeout, $location, RaceService, ConfigService, ControllerHelper) {
   var main = this;
   main.isCountingDown = false;
   main.countdownText = 'Countdown';
@@ -57,5 +57,9 @@ angular.module('raceApp').controller('MainController', function ($scope, $timeou
     RaceService.stop();
     main.bestLap = {};
     main.leader = {};
+  };
+
+  main.goToSetup = function () {
+    $location.path('/setup');
   };
 });
