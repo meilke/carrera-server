@@ -30,6 +30,10 @@ body {
   background: #eee;
   font-size: 60px;
 }
+.name-highlight {
+  background: #990033!important;
+  color: white;
+}
 .laps {
   list-style-type: none;
 }

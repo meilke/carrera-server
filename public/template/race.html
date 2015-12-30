@@ -19,7 +19,9 @@
     <div ng-repeat="player in main.players">
     
       <div class="driver-container col-md-3" ng-controller="DriverController as driver" ng-init="driver.init(player.name)">
-        <div class="name">{{driver.name}} <span class="glyphicon glyphicon-ok" ng-if="driver.player.leader"></span></div>
+        <div class="name" ng-class="[{'name-highlight': driver.falseStart}]">{{driver.name}}
+          <span class="glyphicon glyphicon-ok" ng-if="driver.player.leader"></span>
+        </div>
         <best-lap class="name" lap="driver.player.bestLap"></best-lap>
         <div class="lap-count">{{driver.numberOfLaps}}</div>
         <div class="laps">

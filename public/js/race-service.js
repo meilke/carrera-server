@@ -22,7 +22,7 @@ angular.module('raceApp').factory('RaceService', function ($rootScope) {
   });
 
   socket.on('false-start', function (player) {
-    $rootScope.$broadcast('false-start', player);
+    $rootScope.$broadcast('false-start:' + player.name, player);
   });
 
   function bestLap(players) {
