@@ -13,5 +13,8 @@
     { "name": "Michael", "photoPin": { "bcm": 4, "wpi": 7 }, "ledPin": { "bcm": 17, "wpi": 0 } },
     { "name": "Sebastian", "photoPin": { "bcm": 4, "wpi": 7 }, "ledPin": { "bcm": 17, "wpi": 0 } },
     { "name": "Jaques", "photoPin": { "bcm": 4, "wpi": 7 }, "ledPin": { "bcm": 17, "wpi": 0 } }
-  ]
+  ],
+  "signal": {
+    "ignoreUnderMs": 500
+  }
 }

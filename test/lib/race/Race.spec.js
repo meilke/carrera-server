@@ -13,11 +13,11 @@ describe('Race', () => {
       .then(_.bind(race.signal, race, configuredPlayers[1]))
       .then(_.partial(bluebird.delay, 10))
       .then(_.bind(race.signal, race, configuredPlayers[0]))
-      .then(_.partial(bluebird.delay, 100))
+      .then(_.partial(bluebird.delay, 200))
       .then(_.bind(race.signal, race, configuredPlayers[0]))
-      .then(_.partial(bluebird.delay, 20))
+      .then(_.partial(bluebird.delay, 100))
       .then(_.bind(race.signal, race, configuredPlayers[1]))
-      .then(_.partial(bluebird.delay, 20))
+      .then(_.partial(bluebird.delay, 100))
       .then(_.bind(race.signal, race, configuredPlayers[1]));
   }
 
@@ -35,7 +35,10 @@ describe('Race', () => {
           delay: 1
         }
       },
-      players: configuredPlayers
+      players: configuredPlayers,
+      signal: {
+        ignoreUnderMs: 50
+      }
     });
   });
 
@@ -109,6 +112,26 @@ describe('Race', () => {
         var players = race.getPlayers();
         expect(players[0].laps).toEqual(1);
         expect(players[1].laps).toEqual(2);
+        done();
+      });
+  });
+
+  it('ignores laps too short', (done) => {
+    race
+      .start(configuredPlayers)
+      .then(_.partial(bluebird.delay, 10))
+      .then(_.bind(race.signal, race, configuredPlayers[0]))
+      .then(_.partial(bluebird.delay, 20))
+      .then(_.bind(race.signal, race, configuredPlayers[0]))
+      .then(_.partial(bluebird.delay, 100))
+      .then(_.bind(race.signal, race, configuredPlayers[0]))
+      .then(_.partial(bluebird.delay, 100))
+      .then(_.bind(race.signal, race, configuredPlayers[0]))
+      .then(() => {
+        var players = race.getPlayers();
+        expect(players[0].laps).toEqual(2);
+        expect(players[0].lapData[0].elapsedMs).toBeGreaterThan(120);
+        expect(players[0].lapData[1].elapsedMs).toBeLessThan(120);
         done();
       });
   });
