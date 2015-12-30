@@ -12,7 +12,8 @@ angular.module('raceApp').controller('DriverController', function ($scope, $time
   function lap(event, player) {
     ControllerHelper.within($scope, function () {
       driver.player = player;
-      driver.laps = player.lapData.slice(-5).reverse();
+      driver.lastLapsReversed = player.lapData.slice(-5).reverse();
+      driver.allLaps = player.lapData;
       driver.numberOfLaps = player.laps;
     });
   }
@@ -26,7 +27,7 @@ angular.module('raceApp').controller('DriverController', function ($scope, $time
   function reset(event) {
     driver.numberOfLaps = 0;
     driver.falseStart = false;
-    driver.laps = [];
+    driver.lastLapsReversed = [];
     driver.player = {};
   }
 });
