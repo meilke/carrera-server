@@ -121,7 +121,7 @@ describe('Race', () => {
       .start(configuredPlayers)
       .then(_.partial(bluebird.delay, 10))
       .then(_.bind(race.signal, race, configuredPlayers[0]))
-      .then(_.partial(bluebird.delay, 20))
+      .then(_.partial(bluebird.delay, 30))
       .then(_.bind(race.signal, race, configuredPlayers[0]))
       .then(_.partial(bluebird.delay, 100))
       .then(_.bind(race.signal, race, configuredPlayers[0]))
