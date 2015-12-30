@@ -17,6 +17,10 @@ angular.module('raceApp').factory('RaceService', function ($rootScope) {
     $rootScope.$broadcast('started');
   });
 
+  socket.on('stopped', function () {
+    $rootScope.$broadcast('stopped');
+  });
+
   socket.on('false-start', function (player) {
     $rootScope.$broadcast('false-start', player);
   });
@@ -34,12 +38,10 @@ angular.module('raceApp').factory('RaceService', function ($rootScope) {
 
   function reset() {
     socket.emit('reset', '');
-    $rootScope.$broadcast('reset');
   }
 
   function stop() {
     socket.emit('stop', '');
-    $rootScope.$broadcast('reset');
   }
 
   function playerByName(players, name) {

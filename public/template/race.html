@@ -35,9 +35,15 @@
   </div>
 
   <div class="footer row">
-    <button class="col-md-6 btn btn-primary btn-lg big" ng-click="main.reset()">Reset</button>
-    <button class="col-md-6 btn btn-lg big" ng-click="main.stop()">Stop</button>
-    <button class="col-md-6 btn btn-lg big" ng-click="main.goToSetup()">Setup</button>
+    <div class="col-md-4">
+      <button class="btn btn-primary btn-lg big" ng-click="main.reset()">Reset</button>
+    </div>
+    <div class="col-md-4">
+      <button class="btn btn-lg big" ng-click="main.stop()">Stop</button>
+    </div>
+    <div class="col-md-4">
+      <button class="btn btn-lg big" ng-click="main.goToSetup()">Setup</button>
+    </div>
   </div>
 
 </div>

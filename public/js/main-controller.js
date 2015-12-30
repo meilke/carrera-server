@@ -2,6 +2,8 @@ angular.module('raceApp').controller('MainController', function ($scope, $timeou
   var main = this;
   main.isCountingDown = false;
   main.countdownText = 'Countdown';
+  main.reset = RaceService.reset;
+  main.stop = RaceService.stop;
 
   ConfigService
     .getPlayers()
@@ -13,6 +15,7 @@ angular.module('raceApp').controller('MainController', function ($scope, $timeou
   $scope.$on('started', started);
   $scope.$on('best:lap', bestLap);
   $scope.$on('best:player', bestPlayer);
+  $scope.$on('stopped', reset);
 
   function countdown(event, countdownData) {
     ControllerHelper.within($scope, function () {
@@ -46,19 +49,14 @@ angular.module('raceApp').controller('MainController', function ($scope, $timeou
       main.leader = player;
     });
   }
+
+  function reset(event) {
+    ControllerHelper.within($scope, function () {
+      main.bestLap = {};
+      main.leader = {};
+    });
+  }
   
-  main.reset = function () {
-    RaceService.reset();
-    main.bestLap = {};
-    main.leader = {};
-  };
-
-  main.stop = function () {
-    RaceService.stop();
-    main.bestLap = {};
-    main.leader = {};
-  };
-
   main.goToSetup = function () {
     $location.path('/setup');
   };
