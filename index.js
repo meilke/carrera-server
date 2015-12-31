@@ -4,10 +4,28 @@ var express = require('express'),
   io = require('socket.io')(http),
   _ = require('lodash'),
   config = require('config'),
-  gpio = require('./lib/gpio' + config.gpio.module)(config),
+  gpio = require('./lib/gpio' + config.gpio.module)(),
   Race = require('./lib/race/Race'),
   race = new Race(config),
   bodyParser = require('body-parser');
+
+function watch() {
+  gpio.watch(config, function (player) {
+    if (!race.running) {
+      console.log('Signal but race is not started yet:' + player.name);
+
+      if (race.isCountingDown()) {
+        io.emit('false-start', player);
+      }
+
+      return;
+    }
+
+    var racePlayer = race.findPlayerByName(player.name);
+    race.signal(racePlayer);
+    io.emit('lap', race.getPlayers());
+  });
+}
 
 app.use('/public', express.static('public'));
 app.use(bodyParser.json());
@@ -25,25 +43,12 @@ app.put('/api/players', function(req, res) {
     res.sendStatus(405);
   } else {
     config.players = req.body;
+    watch();
     res.sendStatus(204);
   }
 });
 
-gpio.watch(function (player) {
-  if (!race.running) {
-    console.log('Signal but race is not started yet:' + player.name);
-
-    if (race.isCountingDown()) {
-      io.emit('false-start', player);
-    }
-
-    return;
-  }
-
-  var racePlayer = race.findPlayerByName(player.name);
-  race.signal(racePlayer);
-  io.emit('lap', race.getPlayers());
-});
+watch();
 
 race.on('countdown', function (countdown) {
   console.log('countdown', countdown.count);
