@@ -3,7 +3,7 @@
     "module": ""
   },
   "players": [
-    { "name": "Innen", "photoPin": { "bcm": 4, "wpi": 7 }, "ledPin": { "bcm": 17, "wpi": 0 } },
-    { "name": "Ausen", "photoPin": { "bcm": 25, "wpi": 6 }, "ledPin": { "bcm": 17, "wpi": 0 } }
+    { "name": "Aussen", "photoPin": { "bcm": 4, "wpi": 7 }, "ledPin": { "bcm": 17, "wpi": 0 } },
+    { "name": "Innen", "photoPin": { "bcm": 25, "wpi": 6 }, "ledPin": { "bcm": 17, "wpi": 0 } }
   ]
 }
