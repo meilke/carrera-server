@@ -17,7 +17,23 @@ angular.module('raceApp').directive('lapTimes', function () {
     scope: {
       driver: '=driver'
     },
-    templateUrl: 'public/template/laps.html'
+    templateUrl: 'public/template/lap-times.html'
+  };
+});
+
+angular.module('raceApp').directive('driverSwitch', function () {
+  return {
+    restrict: 'E',
+    replace: true,
+    scope: {
+      driver: '=driver'
+    },
+    templateUrl: 'public/template/driver-switch.html',
+    link: function (scope, element, attr) {
+      scope.toggle = function () {
+        scope.driver.showingLaps = !scope.driver.showingLaps;
+      };
+    }
   };
 });
 
@@ -52,10 +68,8 @@ angular.module('raceApp').directive('lapChart', function () {
       };
 
       var myLineChart = new Chart(ctx).Line(data, {
-        scaleOverride: true,
-        scaleStepWidth: 1,
-        scaleSteps: 10,
-        scaleStartValue: 0
+        scaleBeginAtZero: true,
+        animation: false
       });
 
       function lap(event, player) {

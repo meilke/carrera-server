@@ -23,9 +23,12 @@
           <span class="glyphicon glyphicon-ok" ng-if="driver.player.leader"></span>
         </div>
         <best-lap class="name" lap="driver.player.bestLap"></best-lap>
-        <div class="lap-count">{{driver.numberOfLaps}}</div>
-        <!-- <lap-times driver="driver"></lap-times> -->
-        <lap-chart driver="driver"></lap-chart>
+        <div class="clearfix grey">
+          <div class="pull-left lap-count">{{driver.numberOfLaps}}</div>
+          <driver-switch class="pull-right driver-switch" driver="driver"></driver-switch>
+        </div>
+        <lap-times driver="driver" ng-show="driver.showingLaps"></lap-times>
+        <lap-chart driver="driver" ng-show="!driver.showingLaps"></lap-chart>
       </div>
 
     </div>

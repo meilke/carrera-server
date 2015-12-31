@@ -29,5 +29,6 @@ angular.module('raceApp').controller('DriverController', function ($scope, $time
     driver.falseStart = false;
     driver.lastLapsReversed = [];
     driver.player = {};
+    driver.showingLaps = true;
   }
 });
